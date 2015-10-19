@@ -102,8 +102,8 @@
       var field = this.insertFields(content, assoc, link);
       // bubble up event upto document (through form)
       field
-        .trigger({ type: 'nested:fieldUpAdded', field: field })
-        .trigger({ type: 'nested:fieldUpAdded:' + assoc, field: field });
+        .trigger({ type: 'nested:fieldAdded', field: field })
+        .trigger({ type: 'nested:fieldAdded:' + assoc, field: field });
       return false;
     },
     newId: function() {

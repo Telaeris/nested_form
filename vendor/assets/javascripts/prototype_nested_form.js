@@ -104,8 +104,8 @@ document.observe('click', function(e, el) {
     } else {
       field = el.insert({ before: content });
     }
-    field.fire('nested:fieldUpAdded', {field: field});
-    field.fire('nested:fieldUpAdded:' + assoc, {field: field});
+    field.fire('nested:fieldAdded', {field: field});
+    field.fire('nested:fieldAdded:' + assoc, {field: field});
     return false;
   }
 });

@@ -137,6 +137,7 @@
   window.nestedFormEvents = new NestedFormEvents();
   $(document)
     .delegate('form a.add_nested_fields',    'click', nestedFormEvents.addFields)
+    .delegate('form a.add_nested_up_fields',   'click', nestedFormEvents.addUpFields)
     .delegate('form a.remove_nested_fields', 'click', nestedFormEvents.removeFields);
 })(jQuery);
 

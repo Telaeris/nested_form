@@ -56,7 +56,7 @@
         .trigger({ type: 'nested:fieldAdded:' + assoc, field: field });
       return false;
     },
-    addUpField: function(e) {
+    addUpFields: function(e) {
       // Setup
       var link      = e.currentTarget;
       var assoc     = $(link).data('association');                // Name of child

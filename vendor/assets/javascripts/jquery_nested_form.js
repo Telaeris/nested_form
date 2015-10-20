@@ -1,7 +1,6 @@
 (function($) {
   window.NestedFormEvents = function() {
     this.addFields = $.proxy(this.addFields, this);
-    this.addUpFields = $.proxy(this.addUpFields, this);
     this.removeFields = $.proxy(this.removeFields, this);
   };
 
@@ -56,7 +55,7 @@
         .trigger({ type: 'nested:fieldAdded:' + assoc, field: field });
       return false;
     },
-    addUpFields: function(e) {
+    addRowFields: function(e, $currentRow, type) {
       // Setup
       var link      = e.currentTarget;
       var assoc     = $(link).data('association');                // Name of child
@@ -99,11 +98,11 @@
       var new_id  = this.newId();
       content     = $.trim(content.replace(regexp, new_id));
 
-      var field = this.insertFields(content, assoc, link);
+      var field = this.insertRowField(content, assoc, $currentRow, type);
       // bubble up event upto document (through form)
       field
-        .trigger({ type: 'nested:fieldAdded', field: field })
-        .trigger({ type: 'nested:fieldAdded:' + assoc, field: field });
+        .trigger({ type: 'nested:rowFieldAdded', field: field })
+        .trigger({ type: 'nested:rowFieldAdded:' + assoc, field: field });
       return false;
     },
     newId: function() {
@@ -115,6 +114,13 @@
         return $(content).appendTo($(target));
       } else {
         return $(content).insertBefore(link);
+      }
+    },
+    insertRowField: function(content, assoc, $currentRow, type) {
+      if (type == "above") {
+        return $(content).insertBefore($currentRow);
+      } else if (type == "below") {
+        return $(content).insertAfter($currentRow);
       }
     },
     removeFields: function(e) {
@@ -137,7 +143,6 @@
   window.nestedFormEvents = new NestedFormEvents();
   $(document)
     .delegate('form a.add_nested_fields',    'click', nestedFormEvents.addFields)
-    .delegate('form a.add_nested_up_fields',   'click', nestedFormEvents.addUpFields)
     .delegate('form a.remove_nested_fields', 'click', nestedFormEvents.removeFields);
 })(jQuery);
 

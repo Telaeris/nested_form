@@ -9,7 +9,12 @@
       // Setup
       var link      = e.currentTarget;
       var assoc     = $(link).data('association');                // Name of child
-      var blueprint = $('#' + $(link).data('blueprint-id'));
+      var blueprint;
+      if($(link).parents('form').length > 0) {
+        blueprint   = $(link).parents('form').find('#' + $(link).data('blueprint-id'));
+      } else {
+        blueprint   = $('#' + $(link).data('blueprint-id'));
+      }
       var content   = blueprint.data('blueprint');                // Fields template
 
       // Make the context correct by replacing <parents> with the generated ID
@@ -59,7 +64,12 @@
       // Setup
       var link      = e.currentTarget;
       var assoc     = $(link).data('association');                // Name of child
-      var blueprint = $('#' + $(link).data('blueprint-id'));
+      var blueprint;
+      if($(link).parents('form').length > 0) {
+        blueprint   = $(link).parents('form').find('#' + $(link).data('blueprint-id'));
+      } else {
+        blueprint   = $('#' + $(link).data('blueprint-id'));
+      }
       var content   = blueprint.data('blueprint');                // Fields template
 
       // Make the context correct by replacing <parents> with the generated ID
